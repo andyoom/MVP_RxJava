@@ -3,6 +3,11 @@ package com.andy;
 import android.app.Application;
 import android.content.Context;
 
+import com.andy.common.utils.CrashHandler;
+import com.andy.di.component.AppComponent;
+import com.andy.di.component.DaggerAppComponent;
+import com.andy.di.module.AppModule;
+
 /**
  * 项目名称：MVP_RxJava
  * 所属包名：com.andy
@@ -16,7 +21,6 @@ import android.content.Context;
 public class AppApplication extends Application{
 
     private AppComponent appComponent;
-
     public static AppApplication get(Context context){
         return (AppApplication)context.getApplicationContext();
     }
@@ -24,6 +28,9 @@ public class AppApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
 
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
@@ -33,4 +40,5 @@ public class AppApplication extends Application{
     public AppComponent getAppComponent() {
         return appComponent;
     }
+
 }

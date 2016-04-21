@@ -1,54 +1,88 @@
 package com.andy.ui.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.andy.AppApplication;
 import com.andy.R;
+import com.andy.di.component.DaggerMainActivityComponent;
+import com.andy.di.module.MainActivityModule;
+import com.andy.presenter.api.MainPresenter;
+import com.andy.ui.fragment.AboutFragment;
+import com.andy.ui.fragment.PicFragment;
+import com.andy.ui.iview.MainView;
 
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+
+public class MainActivity extends AppCompatActivity implements MainView {
+
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private Toolbar mToolbar;
+    private NavigationView mNavigationView;
+
+    @Inject
+    MainPresenter mMainPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        DaggerMainActivityComponent.builder()
+                .appComponent(AppApplication.get(this).getAppComponent())
+                .mainActivityModule(new MainActivityModule(this))
+                .build()
+                .inject(this);
+
+        setContentView(R.layout.activity_main);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+        mToggle.syncState();
+
+        mDrawerLayout.setDrawerListener(mToggle);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        setupDrawerContent(mNavigationView);
+        switchPicture();
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onNavigationItemSelected(MenuItem item) {
+                mMainPresenter.switchNavigation(item.getItemId());
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                return true;
             }
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void switchPicture() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, new PicFragment()).commit();
+        mToolbar.setTitle(R.string.picture);
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void switchAbout() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, new AboutFragment()).commit();
+        mToolbar.setTitle(R.string.about);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

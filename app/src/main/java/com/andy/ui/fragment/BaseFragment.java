@@ -1,5 +1,7 @@
 package com.andy.ui.fragment;
 
+import android.app.Fragment;
+
 /**
  * 项目名称：MVP_RxJava
  * 所属包名：com.andy.ui.fragment
@@ -10,5 +12,5 @@ package com.andy.ui.fragment;
  * 修改时间：2016/4/15 15:16
  * 修改备注：
  */
-public class BaseFragment {
+public abstract class BaseFragment extends Fragment {
 }
