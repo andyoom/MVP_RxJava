@@ -1,7 +1,7 @@
 package com.andy.presenter.impl;
 
 import com.andy.modle.api.ApiService;
-import com.andy.modle.bean.ClassifyBean;
+import com.andy.modle.bean.TngouEntity;
 import com.andy.modle.domain.ImgClassitfyModel;
 import com.andy.modle.domain.ImgClassitfyModelImpl;
 import com.andy.presenter.api.ImgPresenter;
@@ -27,11 +27,11 @@ public class ImgPresenterImpl implements ImgPresenter, ImgClassitfyModelImpl.Onl
     @Override
     public void loadList(int id) {
         mImgView.showProgress();
-        mImgClassitfyModel.loadSuccess(apiService,id,this);
+        mImgClassitfyModel.loadSuccessRx(apiService,id,this);
     }
 
     @Override
-    public void success(List<ClassifyBean> list) {
+    public void success(List<TngouEntity> list) {
         mImgView.hideProgress();
         mImgView.loadImgDatas(list);
     }

@@ -1,7 +1,7 @@
 package com.andy.modle.domain;
 
 import com.andy.modle.api.ApiService;
-import com.andy.modle.bean.ClassifyBean;
+import com.andy.modle.bean.TngouEntity;
 
 import java.util.List;
 
@@ -13,8 +13,10 @@ public interface ImgClassitfyModel {
     //借口需要传递id
     void loadSuccess(ApiService apiService, int id,OnloadImgListener onloadImgListener);
 
+    void loadSuccessRx(ApiService apiService, int id,OnloadImgListener onloadImgListener);
+
     public interface OnloadImgListener {
-        void success(List<ClassifyBean> list);
+        void success(List<TngouEntity> list);
     }
 
 }

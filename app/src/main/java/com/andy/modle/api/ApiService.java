@@ -6,6 +6,7 @@ import com.andy.modle.bean.ShowBean;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * 项目名称：MVP_RxJava
@@ -22,7 +23,13 @@ public interface ApiService {
     @GET("tnfs/api/list")
     Call<ClassifyBean> getPicClassify(@Query("id") int id);
 
+    @GET("tnfs/api/list")
+    Observable<ClassifyBean> getPicClassifyRx(@Query("id") int id);
+
     //分类中图片详细内容列表
     @GET("tnfs/api/show")
     Call<ShowBean> getPicShow(@Query("id") long id);
+
+    @GET("tnfs/api/show")
+    Observable<ShowBean> getPicShowRx(@Query("id") long id);
 }

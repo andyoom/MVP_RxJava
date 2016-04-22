@@ -28,7 +28,5 @@ public class MainPresentImpl implements MainPresenter {
             default:
                 break;
         }
-
-
     }
 }

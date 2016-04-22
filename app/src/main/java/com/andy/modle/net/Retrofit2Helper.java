@@ -2,6 +2,7 @@ package com.andy.modle.net;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -17,12 +18,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrofit2Helper {
 
-    private static final String ENDPOINT = "";
-
     public Retrofit.Builder getBuilder(OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create());
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
         return builder;
     }
 

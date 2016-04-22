@@ -3,20 +3,13 @@ package com.andy.ui.iview;
 import android.os.Bundle;
 
 /**
+ * 类描述：
  * 项目名称：MVP_RxJava
- * 所属包名：com.andy.ui.iview
- * 类描述：针对activity中的onCreate方法重新规划生命周期
  * 创建人：andy
- * 创建时间：2016/4/15 19:23
- * 修改人：andy
- * 修改时间：2016/4/15 19:23
+ * 创建时间：2016/4/22 11:08
  * 修改备注：
  */
 public interface IOnCreate {
-    /**
-     * setContentView方法调用前的一些设置
-     */
-    void beforeContentView();
 
     /**
      * 返回layout的布局文件ID
@@ -37,4 +30,5 @@ public interface IOnCreate {
      * 调用MobileAPI获取初始化数据
      */
     void loadData();
+
 }

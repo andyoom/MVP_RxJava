@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.andy.AppApplication;
-import com.andy.di.component.AppComponent;
-import com.andy.ui.iview.IOnCreate;
+import com.andy.ui.iview.IActivity;
 
 import butterknife.ButterKnife;
 
@@ -20,12 +19,12 @@ import butterknife.ButterKnife;
  * 修改时间：2016/4/15 19:30
  * 修改备注：
  */
-public abstract class BaseActivity extends AppCompatActivity implements IOnCreate {
+public abstract class BaseActivity extends AppCompatActivity implements IActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActivityComponent(AppApplication.get(this).getAppComponent());
+        setupComponent(AppApplication.get(this).getAppComponent());
 
         beforeContentView();
         if(bindLayout()!=0){
@@ -45,6 +44,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IOnCreat
 
     }
 
+    @Override
+    public void initVariables() {
+
+    }
+
+    @Override
+    public void loadData() {
+
+    }
+
     public <T extends View>T findView(int viewId){
         return (T)findViewById(viewId);
     }
@@ -54,6 +63,4 @@ public abstract class BaseActivity extends AppCompatActivity implements IOnCreat
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
-    protected abstract void setupActivityComponent(AppComponent appComponent);
 }

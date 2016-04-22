@@ -189,6 +189,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             return fileName;
         } catch (Exception e) {
             Log.e(TAG, "an error occured while writing file...", e);
+            Log.e(TAG, sb.toString());
         }
         return null;
     }

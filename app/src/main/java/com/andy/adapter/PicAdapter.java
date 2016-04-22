@@ -3,7 +3,6 @@ package com.andy.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 
 import com.andy.R;
 import com.andy.modle.bean.BaseUrl;
-import com.andy.modle.bean.ClassifyBean;
+import com.andy.modle.bean.TngouEntity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -24,8 +23,7 @@ import butterknife.ButterKnife;
  * Created by tengshuai on 2016/2/23.
  */
 public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
-    ClassifyBean mClassifyBean;
-    List<ClassifyBean> mList;
+    List<TngouEntity> mList;
     Context mContext;
     PicOnItemClickListener mListener;
 
@@ -40,7 +38,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
 
 
     //刷新时获取数据
-    public void setDatas(List<ClassifyBean> list) {
+    public void setDatas(List<TngouEntity> list) {
         this.mList = list;
         this.notifyDataSetChanged();
     }
@@ -54,26 +52,24 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
 
     @Override
     public void onBindViewHolder(PicViewHolder holder, final int position) {
-        mClassifyBean = mList.get(position);
-        Uri uri = Uri.parse(BaseUrl.PIC_URL_Base + mClassifyBean.getTngou().get(position).getImg());
-        Log.e("image",uri.toString());
+        final TngouEntity tngouEntity = mList.get(position);
+        Uri uri = Uri.parse(BaseUrl.PIC_URL_Base + tngouEntity.getImg());
+//        Log.e("image",uri.toString());
         Glide.with(mContext).load(uri).into(holder.mView);
         //图片封面
 
         //图片张数
-        holder.tv_picClassIftyNum.setText(mClassifyBean.getTngou().get(position).getSize() + "张");
+        holder.tv_picClassIftyNum.setText(tngouEntity.getSize() + "张");
 
         //item点击事件
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.picOnItemClickListener(v, position, mClassifyBean);
+                    mListener.picOnItemClickListener(v, position, tngouEntity);
                 }
             }
         });
-
-
     }
 
     @Override
@@ -97,7 +93,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
     }
 
     public interface PicOnItemClickListener {
-        void picOnItemClickListener(View view, int pos, ClassifyBean bean);
+        void picOnItemClickListener(View view, int pos, TngouEntity bean);
     }
 }
 
