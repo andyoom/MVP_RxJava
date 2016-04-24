@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="2dp"
-    app:cardElevation="5dp"
+    app:cardElevation="4dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
@@ -19,7 +19,7 @@
             android:id="@+id/sv_picClassitfy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="3dp"
             android:scaleType="fitCenter"
             />
 
@@ -29,8 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
+            android:padding ="5dp"
             android:textColor="@color/colorLight"
             android:textSize="12sp"/>
 

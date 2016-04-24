@@ -33,7 +33,7 @@ public class AboutFragment extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        mTextView.setText("MVP+Retrofit+Material Design,旨在学习,还有很多不足的地方,还请多多交流.新浪微博:@RtSunoath");
+        mTextView.setText(R.string.thanks);
     }
 
 }

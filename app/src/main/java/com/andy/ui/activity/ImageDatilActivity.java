@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.andy.R;
@@ -38,10 +37,10 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
 
     @Inject
     ImgDatilPresenter mPresenter;
-    ImgDetailAdapter mAdapter;
-    LinearLayoutManager mLinearLayoutManager;
-    long id;
-    String title;
+    private ImgDetailAdapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
+    private long id;
+    private String title;
 
     List<ListEntity> mList;
 
@@ -77,7 +76,6 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
         tv_title.setText(title);
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        onRefresh();
 
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -87,14 +85,19 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
     }
 
     @Override
+    public void loadData() {
+        super.loadData();
+        onRefresh();
+    }
+
+    @Override
     public void loadData(List<ListEntity> list) {
         if (mList == null) {
             mList = new ArrayList<>();
         }
-        Log.i("RT", list.size() + "");
+//        Log.i("RT", list.size() + "");
         mList.addAll(list);
         mAdapter.setData(list);
-
     }
 
     @Override

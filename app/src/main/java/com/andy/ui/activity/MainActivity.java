@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.andy.R;
@@ -98,9 +99,21 @@ public class MainActivity extends BaseActivity implements MainView {
             mAboutFragment = new AboutFragment();
             tx.add(R.id.frame_layout, mAboutFragment);
         }else{
+            tx.hide(mPicFragment);
             tx.show(mAboutFragment);
         }
         tx.commit();
         mToolbar.setTitle(R.string.about);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            if(mDrawerLayout.isDrawerOpen(mNavigationView)) {
+                mDrawerLayout.closeDrawers();
+                return false;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
