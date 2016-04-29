@@ -9,6 +9,6 @@
 
 
 # 参考资料
-      *[https://github.com/Rtsunoath/Sunoath](https://github.com/Rtsunoath/Sunoath)
-      *[https://github.com/rengwuxian/RxJavaSamples](https://github.com/rengwuxian/RxJavaSamples)
-      *[https://github.com/hongyangAndroid/baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
+* [https://github.com/Rtsunoath/Sunoath](https://github.com/Rtsunoath/Sunoath)
+* [https://github.com/rengwuxian/RxJavaSamples](https://github.com/rengwuxian/RxJavaSamples)
+* [https://github.com/hongyangAndroid/baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
