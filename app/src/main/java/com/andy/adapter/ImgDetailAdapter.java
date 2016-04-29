@@ -2,65 +2,24 @@ package com.andy.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.andy.R;
+import com.andy.common.adapter.CommonAdapter;
+import com.andy.common.adapter.ViewHolder;
 import com.andy.modle.bean.BaseUrl;
 import com.andy.modle.bean.ListEntity;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+public class ImgDetailAdapter extends CommonAdapter<ListEntity> {
 
-/**
- * Created by tengshuai on 2016/2/25.
- */
-public class ImgDetailAdapter extends RecyclerView.Adapter<ImgDetailAdapter.ViewHolder> {
-
-    Context mContext;
-    List<ListEntity> mList;
-
-    public ImgDetailAdapter(Context context) {
-        this.mContext = context;
-    }
-
-    public void setData(List<ListEntity> list) {
-        this.mList = list;
-        this.notifyDataSetChanged();
+    public ImgDetailAdapter(Context context, int layoutId, List<ListEntity> datas) {
+        super(context, layoutId, datas);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_imgdetail, null);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        ListEntity entity = mList.get(position);
-        Uri uri = Uri.parse(BaseUrl.PIC_URL_Base + entity.getSrc());
-        //Log.e("image",uri.toString());
-        Glide.with(mContext).load(uri).into(holder.iv_detail);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList == null ? 0 : mList.size();
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.iv_pic)
-        ImageView iv_detail;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    public void convert(ViewHolder holder, ListEntity listEntity) {
+        Uri uri = Uri.parse(BaseUrl.PIC_URL_Base + listEntity.getSrc());
+        holder.setImageFromNet(mContext,uri,R.id.iv_pic);
     }
 }

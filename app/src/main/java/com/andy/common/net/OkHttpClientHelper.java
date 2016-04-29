@@ -1,9 +1,9 @@
-package com.andy.modle.net;
+package com.andy.common.net;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * 项目名称：MVP_RxJava
@@ -17,9 +17,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class OkHttpClientHelper {
 
-    public OkHttpClient getOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
+    public OkHttpClient getOkHttpClient(Interceptor interceptor) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(interceptor)
                 .connectTimeout(60 * 1000, TimeUnit.MILLISECONDS)
                 .readTimeout(60 * 1000, TimeUnit.MILLISECONDS)
                 .build();

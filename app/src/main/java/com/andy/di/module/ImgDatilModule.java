@@ -20,7 +20,7 @@ import dagger.Provides;
  * 修改备注：
  */
 @Module
-public class ImgDatilModule {
+public class ImgDatilModule implements IModule<ImgDatiView,ImgDatilPresenter>{
     private ImgDatiView imgView;
 
     public ImgDatilModule(ImgDatiView imgView) {
@@ -29,13 +29,15 @@ public class ImgDatilModule {
 
     @ActivityScope
     @Provides
-    ImgDatiView provideImainView(){
+    @Override
+    public ImgDatiView provideView(){
         return imgView;
     }
 
     @ActivityScope
     @Provides
-    ImgDatilPresenter ProvideMainActivityPresenter(ImgDatiView imgView, ApiService apiService){
-        return new ImgDatilPresenterImpl(imgView,apiService);
+    @Override
+    public ImgDatilPresenter ProvidePresenter(ImgDatiView iview, ApiService apiService){
+        return new ImgDatilPresenterImpl(iview,apiService);
     }
 }

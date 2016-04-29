@@ -1,4 +1,4 @@
-package com.andy.modle.net;
+package com.andy.common.net;
 
 import com.andy.modle.api.ApiService;
 import com.andy.modle.bean.BaseUrl;
@@ -7,8 +7,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 /**
@@ -26,14 +26,14 @@ public class NetRetrofitHelper {
 
     @Provides
     @Singleton
-    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-        return new HttpLoggingInterceptorHelper().getHttpLoggingInterceptor();
+    Interceptor provideHttpLoggingInterceptor() {
+        return new InterceptorHelper().getInterceptor();
     }
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
-        return new OkHttpClientHelper().getOkHttpClient(httpLoggingInterceptor);
+    OkHttpClient provideOkHttpClient(Interceptor interceptor) {
+        return new OkHttpClientHelper().getOkHttpClient(interceptor);
     }
 
     @Provides

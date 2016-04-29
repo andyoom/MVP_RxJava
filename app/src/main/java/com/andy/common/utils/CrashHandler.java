@@ -7,8 +7,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,7 +36,7 @@ import java.util.Map;
  */
 public class CrashHandler implements UncaughtExceptionHandler {
 
-    public static final String TAG = "CrashHandler";
+//    public static final String TAG = "CrashHandler";
 
     //系统默认的UncaughtException处理类
     private UncaughtExceptionHandler mDefaultHandler;
@@ -83,7 +84,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                Log.e(TAG, "error : ", e);
+                KLog.e("error : ", e);
             }
             //退出程序
             android.os.Process.killProcess(android.os.Process.myPid());
@@ -132,16 +133,15 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 infos.put("versionCode", versionCode);
             }
         } catch (NameNotFoundException e) {
-            Log.e(TAG, "an error occured when collect package info", e);
+            KLog.e("an error occured when collect package info", e);
         }
         Field[] fields = Build.class.getDeclaredFields();
         for (Field field : fields) {
             try {
                 field.setAccessible(true);
                 infos.put(field.getName(), field.get(null).toString());
-                Log.d(TAG, field.getName() + " : " + field.get(null));
             } catch (Exception e) {
-                Log.e(TAG, "an error occured when collect crash info", e);
+                KLog.e("an error occured when collect crash info", e);
             }
         }
     }
@@ -159,6 +159,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             String key = entry.getKey();
             String value = entry.getValue();
             sb.append(key + "=" + value + "\n");
+            KLog.e(key + "=" + value + "\n");
         }
 
         Writer writer = new StringWriter();
@@ -172,6 +173,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         printWriter.close();
         String result = writer.toString();
         sb.append(result);
+        KLog.e(result);
         try {
             long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
@@ -188,8 +190,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
             }
             return fileName;
         } catch (Exception e) {
-            Log.e(TAG, "an error occured while writing file...", e);
-            Log.e(TAG, sb.toString());
+            KLog.e("an error occured while writing file...", e);
+            KLog.e(sb.toString());
         }
         return null;
     }

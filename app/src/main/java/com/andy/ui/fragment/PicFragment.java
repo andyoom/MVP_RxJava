@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.andy.R;
 import com.andy.di.component.AppComponent;
+import com.andy.ui.base.BaseFragment;
 
 import butterknife.Bind;
 
@@ -25,7 +26,7 @@ public class PicFragment extends BaseFragment {
 
     @Override
     public void setupComponent(AppComponent appComponent) {
-        //Log.e("pic","setupComponent");
+        //KLog.e("setupComponent");
     }
 
     @Override

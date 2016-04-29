@@ -1,7 +1,7 @@
 package com.andy.di.component;
 
 import com.andy.di.module.ImgViewModule;
-import com.andy.di.scope.ActivityScope;
+import com.andy.di.scope.FragmentScope;
 import com.andy.presenter.api.ImgPresenter;
 import com.andy.ui.fragment.PicContentFiveFrament;
 
@@ -17,7 +17,7 @@ import dagger.Component;
  * 修改时间：2016/4/15 15:16
  * 修改备注：
  */
-@ActivityScope
+@FragmentScope
 @Component( modules= ImgViewModule.class,dependencies = AppComponent.class)
 public interface ImgView5Component {
 

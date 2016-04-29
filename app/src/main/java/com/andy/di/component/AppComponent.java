@@ -2,9 +2,9 @@ package com.andy.di.component;
 
 import android.app.Application;
 
+import com.andy.common.net.NetRetrofitHelper;
 import com.andy.di.module.AppModule;
 import com.andy.modle.api.ApiService;
-import com.andy.modle.net.NetRetrofitHelper;
 
 import javax.inject.Singleton;
 

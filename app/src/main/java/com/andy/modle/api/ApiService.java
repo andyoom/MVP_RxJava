@@ -9,9 +9,9 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
+ * 类描述：Api类
  * 项目名称：MVP_RxJava
  * 所属包名：com.andy.modle.api
- * 类描述：
  * 创建人：andy
  * 创建时间：2016/4/15 15:02
  * 修改人：andy

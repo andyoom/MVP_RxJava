@@ -1,6 +1,7 @@
 package com.andy.di.module;
 
 import com.andy.di.scope.ActivityScope;
+import com.andy.modle.api.ApiService;
 import com.andy.presenter.api.MainPresenter;
 import com.andy.presenter.impl.MainPresentImpl;
 import com.andy.ui.iview.MainView;
@@ -19,22 +20,25 @@ import dagger.Provides;
  * 修改备注：
  */
 @Module
-public class MainActivityModule {
-    private MainView mainView;
+public class MainActivityModule implements IModule<MainView,MainPresenter>{
+
+    private MainView mMainView;
 
     public MainActivityModule(MainView mainView) {
-        this.mainView = mainView;
+        mMainView = mainView;
     }
 
     @ActivityScope
     @Provides
-    MainView provideImainView(){
-        return mainView;
+    @Override
+    public MainView provideView() {
+        return mMainView;
     }
 
     @ActivityScope
     @Provides
-    MainPresenter ProvideMainActivityPresenter(MainView mainView){
-        return new MainPresentImpl(mainView);
+    @Override
+    public MainPresenter ProvidePresenter(MainView iview, ApiService apiService) {
+        return new MainPresentImpl(iview);
     }
 }

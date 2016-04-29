@@ -6,12 +6,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.andy.R;
 import com.andy.adapter.PicAdapter;
+import com.andy.common.adapter.OnItemClickListener;
 import com.andy.modle.bean.TngouEntity;
 import com.andy.presenter.api.ImgPresenter;
 import com.andy.ui.activity.ImageDatilActivity;
+import com.andy.ui.base.BaseFragment;
 import com.andy.ui.iview.ImgView;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import butterknife.Bind;
  * 创建时间：2016/4/22 13:12
  * 修改备注：
  */
-public abstract class PicTypeFragment extends BaseFragment  implements SwipeRefreshLayout.OnRefreshListener, ImgView {
+public abstract class PicTypeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ImgView {
     private int classItfyId = 1;
 
     @Bind(R.id.swipe_layout_pic)
@@ -49,19 +52,29 @@ public abstract class PicTypeFragment extends BaseFragment  implements SwipeRefr
     }
 
     @Override
+    public void initVariables() {
+        super.initVariables();
+        mList = new ArrayList<>();
+    }
+
+    @Override
     public void initViews(Bundle savedInstanceState) {
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         mGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        mPicAdapter = new PicAdapter(getActivity());
+        mPicAdapter = new PicAdapter(getActivity(),R.layout.item_pic_classitfy,mList);
         mRecyclerView.setAdapter(mPicAdapter);
-        mPicAdapter.setOnitemClickLisenter(new PicAdapter.PicOnItemClickListener() {
+        mPicAdapter.setOnItemClickListener(new OnItemClickListener<TngouEntity>() {
             @Override
-            public void picOnItemClickListener(View view, int pos, TngouEntity bean) {
-                //TODO
-                toImageDatilActivity(pos,bean);
+            public void onItemClick(ViewGroup parent, View view, TngouEntity tngouEntity, int position) {
+                toImageDatilActivity(position,tngouEntity);
+            }
+
+            @Override
+            public boolean onItemLongClick(ViewGroup parent, View view, TngouEntity tngouEntity, int position) {
+                return false;
             }
         });
     }
@@ -85,21 +98,16 @@ public abstract class PicTypeFragment extends BaseFragment  implements SwipeRefr
     @Override
     public void onRefresh() {
         if (mList != null) {
-            mPicAdapter.setDatas(mList);
+            mPicAdapter.notifyDataSetChanged();
         }
-        //Log.e("pic",this+"--->"+classItfyId);
         mPresenter.loadList(classItfyId);
     }
 
     @Override
     public void loadImgDatas(List<TngouEntity> mlist) {
-        if (mList == null) {
-            mList = new ArrayList<>();
-        }else{
-            mList.clear();
-        }
+        mList.clear();
         mList.addAll(mlist);
-        mPicAdapter.setDatas(mList);
+        mPicAdapter.notifyDataSetChanged();
     }
 
     @Override

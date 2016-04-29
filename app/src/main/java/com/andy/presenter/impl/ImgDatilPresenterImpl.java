@@ -1,5 +1,6 @@
 package com.andy.presenter.impl;
 
+import com.andy.AppApplication;
 import com.andy.modle.api.ApiService;
 import com.andy.modle.bean.ListEntity;
 import com.andy.modle.domain.ImgDetilModel;
@@ -25,6 +26,8 @@ public class ImgDatilPresenterImpl implements ImgDatilPresenter, ImgDetilModelIm
 
     @Override
     public void loadList(long id) {
+        if(!AppApplication.isNetAvailable)
+            return;
         mImgDetilModel.successRx(apiService,id, this);
     }
 

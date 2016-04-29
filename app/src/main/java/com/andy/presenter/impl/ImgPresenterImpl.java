@@ -1,5 +1,6 @@
 package com.andy.presenter.impl;
 
+import com.andy.AppApplication;
 import com.andy.modle.api.ApiService;
 import com.andy.modle.bean.TngouEntity;
 import com.andy.modle.domain.ImgClassitfyModel;
@@ -26,6 +27,8 @@ public class ImgPresenterImpl implements ImgPresenter, ImgClassitfyModelImpl.Onl
 
     @Override
     public void loadList(int id) {
+        if(!AppApplication.isNetAvailable)
+            return;
         mImgView.showProgress();
         mImgClassitfyModel.loadSuccessRx(apiService,id,this);
     }

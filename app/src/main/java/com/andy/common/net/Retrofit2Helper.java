@@ -1,4 +1,4 @@
-package com.andy.modle.net;
+package com.andy.common.net;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -32,5 +32,4 @@ public class Retrofit2Helper {
                 .build();
         return retrofit;
     }
-
 }

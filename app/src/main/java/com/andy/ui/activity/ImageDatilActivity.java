@@ -14,6 +14,7 @@ import com.andy.di.component.DaggerImgDatilComponent;
 import com.andy.di.module.ImgDatilModule;
 import com.andy.modle.bean.ListEntity;
 import com.andy.presenter.api.ImgDatilPresenter;
+import com.andy.ui.base.BaseActivity;
 import com.andy.ui.iview.ImgDatiView;
 
 import java.util.ArrayList;
@@ -69,7 +70,10 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
         Intent intent = getIntent();
         id = intent.getExtras().getLong("id");
         title = intent.getExtras().getString("title");
+
+        mList = new ArrayList<ListEntity>();
     }
+
 
     @Override
     public void initViews(Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new ImgDetailAdapter(this);
+        mAdapter = new ImgDetailAdapter(this,R.layout.item_imgdetail,mList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -92,12 +96,9 @@ public class ImageDatilActivity extends BaseActivity implements ImgDatiView, Swi
 
     @Override
     public void loadData(List<ListEntity> list) {
-        if (mList == null) {
-            mList = new ArrayList<>();
-        }
-//        Log.i("RT", list.size() + "");
+        mList.clear();
         mList.addAll(list);
-        mAdapter.setData(list);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

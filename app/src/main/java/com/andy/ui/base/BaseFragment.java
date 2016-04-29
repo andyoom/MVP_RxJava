@@ -1,4 +1,4 @@
-package com.andy.ui.fragment;
+package com.andy.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,21 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.andy.AppApplication;
-import com.andy.ui.iview.IFragment;
 
 import butterknife.ButterKnife;
 
 /**
+ * 类描述：所有Fragment的基类
  * 项目名称：MVP_RxJava
- * 所属包名：com.andy.ui.fragment
- * 类描述：
  * 创建人：andy
  * 创建时间：2016/4/15 15:16
- * 修改人：andy
- * 修改时间：2016/4/15 15:16
  * 修改备注：
  */
-public abstract class BaseFragment extends Fragment implements IFragment{
+public abstract class BaseFragment extends Fragment implements IFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

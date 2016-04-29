@@ -1,9 +1,9 @@
-package com.andy.ui.iview;
+package com.andy.ui.base;
 
 import android.os.Bundle;
 
 /**
- * 类描述：
+ * 类描述：重载 oncreate方法的接口
  * 项目名称：MVP_RxJava
  * 创建人：andy
  * 创建时间：2016/4/22 11:08

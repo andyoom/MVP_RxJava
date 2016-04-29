@@ -1,6 +1,6 @@
 package com.andy.di.module;
 
-import com.andy.di.scope.ActivityScope;
+import com.andy.di.scope.FragmentScope;
 import com.andy.modle.api.ApiService;
 import com.andy.presenter.api.ImgPresenter;
 import com.andy.presenter.impl.ImgPresenterImpl;
@@ -20,22 +20,24 @@ import dagger.Provides;
  * 修改备注：
  */
 @Module
-public class ImgViewModule {
+public class ImgViewModule implements IModule<ImgView,ImgPresenter>{
     private ImgView imgView;
 
     public ImgViewModule(ImgView imgView) {
         this.imgView = imgView;
     }
 
-    @ActivityScope
+    @FragmentScope
     @Provides
-    ImgView provideImainView(){
+    @Override
+    public ImgView provideView(){
         return imgView;
     }
 
-    @ActivityScope
+    @FragmentScope
     @Provides
-    ImgPresenter ProvideMainActivityPresenter(ImgView imgView, ApiService apiService){
-        return new ImgPresenterImpl(imgView,apiService);
+    @Override
+    public ImgPresenter ProvidePresenter(ImgView iview, ApiService apiService){
+        return new ImgPresenterImpl(iview,apiService);
     }
 }

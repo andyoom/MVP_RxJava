@@ -1,4 +1,4 @@
-package com.andy.ui.activity;
+package com.andy.ui.base;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -7,18 +7,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.andy.AppApplication;
-import com.andy.ui.iview.IActivity;
 
 import butterknife.ButterKnife;
 
 /**
- * 项目名称：MVP_RxJava
- * 所属包名：com.andy.ui.activity
  * 类描述：所有子Activity的基类
+ * 项目名称：MVP_RxJava
  * 创建人：andy
  * 创建时间：2016/4/15 19:30
- * 修改人：andy
- * 修改时间：2016/4/15 19:30
  * 修改备注：
  */
 public abstract class BaseActivity extends AppCompatActivity implements IActivity {

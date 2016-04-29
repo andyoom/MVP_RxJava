@@ -1,5 +1,7 @@
 package com.andy.ui.activity;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +16,8 @@ import com.andy.di.component.AppComponent;
 import com.andy.di.component.DaggerMainActivityComponent;
 import com.andy.di.module.MainActivityModule;
 import com.andy.presenter.api.MainPresenter;
+import com.andy.receiver.ConnectionChangeReceiver;
+import com.andy.ui.base.BaseActivity;
 import com.andy.ui.fragment.AboutFragment;
 import com.andy.ui.fragment.PicFragment;
 import com.andy.ui.iview.MainView;
@@ -38,10 +42,17 @@ public class MainActivity extends BaseActivity implements MainView {
 
     private PicFragment mPicFragment;
     private AboutFragment mAboutFragment;
+    private ConnectionChangeReceiver myReceiver;
 
     @Override
     public int bindLayout() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void initVariables() {
+        super.initVariables();
+        registerReceiver();
     }
 
     @Override
@@ -115,5 +126,21 @@ public class MainActivity extends BaseActivity implements MainView {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver();
+    }
+
+    private  void registerReceiver(){
+        IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        myReceiver=new ConnectionChangeReceiver();
+        this.registerReceiver(myReceiver, filter);
+    }
+
+    private  void unregisterReceiver(){
+        this.unregisterReceiver(myReceiver);
     }
 }

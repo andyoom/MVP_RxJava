@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.andy.R;
 import com.andy.di.component.AppComponent;
+import com.andy.ui.base.BaseFragment;
 
 import butterknife.Bind;
 

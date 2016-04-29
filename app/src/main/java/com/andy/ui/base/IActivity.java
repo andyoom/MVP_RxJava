@@ -1,4 +1,4 @@
-package com.andy.ui.iview;
+package com.andy.ui.base;
 
 /**
  * 项目名称：MVP_RxJava
@@ -10,7 +10,7 @@ package com.andy.ui.iview;
  * 修改时间：2016/4/15 19:23
  * 修改备注：
  */
-public interface IActivity extends ISetupComponent,IOnCreate{
+public interface IActivity extends ISetupComponent,IOnCreate {
     /**
      * setContentView方法调用前的一些设置
      */
