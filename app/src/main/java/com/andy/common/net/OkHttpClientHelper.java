@@ -1,5 +1,7 @@
 package com.andy.common.net;
 
+import android.support.annotation.NonNull;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -17,7 +19,7 @@ import okhttp3.OkHttpClient;
  */
 public class OkHttpClientHelper {
 
-    public OkHttpClient getOkHttpClient(Interceptor interceptor) {
+    public OkHttpClient getOkHttpClient(@NonNull Interceptor interceptor) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(60 * 1000, TimeUnit.MILLISECONDS)

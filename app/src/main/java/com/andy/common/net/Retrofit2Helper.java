@@ -1,5 +1,7 @@
 package com.andy.common.net;
 
+import android.support.annotation.NonNull;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -18,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrofit2Helper {
 
-    public Retrofit.Builder getBuilder(OkHttpClient okHttpClient) {
+    public Retrofit.Builder getBuilder(@NonNull OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -26,7 +28,7 @@ public class Retrofit2Helper {
         return builder;
     }
 
-    public Retrofit getRetrofit(Retrofit.Builder builder,String baseUrl) {
+    public Retrofit getRetrofit(@NonNull Retrofit.Builder builder,@NonNull String baseUrl) {
         Retrofit retrofit = builder
                 .baseUrl(baseUrl)
                 .build();

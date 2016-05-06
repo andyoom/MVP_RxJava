@@ -2,6 +2,7 @@ package com.andy.common.image;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,11 +17,11 @@ import com.bumptech.glide.Glide;
  */
 public class ImageWrapper{
 
-    public static void display(Context context, Uri uri, ImageView imageView){
+    public static void display(Context context, @NonNull Uri uri,@NonNull  ImageView imageView){
         Glide.with(context)
                 .load(uri)
 //                .fitCenter()
-//                .crossFade()
+//                .cros;sFade()
 //                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }

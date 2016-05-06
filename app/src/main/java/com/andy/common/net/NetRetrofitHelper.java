@@ -1,5 +1,7 @@
 package com.andy.common.net;
 
+import android.support.annotation.NonNull;
+
 import com.andy.modle.api.ApiService;
 import com.andy.modle.bean.BaseUrl;
 
@@ -32,25 +34,25 @@ public class NetRetrofitHelper {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(Interceptor interceptor) {
+    OkHttpClient provideOkHttpClient(@NonNull Interceptor interceptor) {
         return new OkHttpClientHelper().getOkHttpClient(interceptor);
     }
 
     @Provides
     @Singleton
-    Retrofit.Builder provideBuilder(OkHttpClient okHttpClient) {
+    Retrofit.Builder provideBuilder(@NonNull OkHttpClient okHttpClient) {
         return new Retrofit2Helper().getBuilder(okHttpClient);
     }
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Retrofit.Builder builder) {
+    Retrofit provideRetrofit(@NonNull Retrofit.Builder builder) {
         return new Retrofit2Helper().getRetrofit(builder, BaseUrl.BASE_HTTP_URL);
     }
 
     @Provides
     @Singleton
-    ApiService provideApi(Retrofit retrofit) {
+    ApiService provideApi(@NonNull Retrofit retrofit) {
         return retrofit.create(ApiService.class);
     }
 
